@@ -1,26 +1,38 @@
 # README of CS240A Project: Data Mining with Declarative Programming
 
-Part 2: K-Nearest Neighbors Classifier (KNN)
+## Part 2: K-Nearest Neighbors Classifier (KNN)
 
 ## 1. Dataset: Hill-Valley Data Set[1]
 The dataset is in Hill-Valley folder, there are eight files, the first seven files are original:
 
 (a) Hill_Valley_without_noise_Training.data 
+
 (b) Hill_Valley_without_noise_Testing.data 
+
 These first two datasets (without noise) are a training/testing set pair where the hills or valleys have a smooth transition. 
+
 (c) Hill_Valley_with_noise_Training.data 
+
 (d) Hill_Valley_with_noise_Testing.data 
+
 These next two datasets (with noise) are a training/testing set pair where the terrain is uneven, and the hill or valley is not as obvious when viewed closely. 
+
 (e) Hill_Valley_sample_arff.text 
+
 The sample ARFF file is useful for setting up experiments, but is not necessary. 
+
 (f) Hill_Valley_visual_examples.jpg
+
 This graphic file shows two example instances from the data. 
+
 (g) Hill-Valley.names
+
 The description of the dataset.
 
 There are 2 additional files:
 
 (h) HV_Training.data: first 200 tuples of Hill_Valley_with_noise_Training.data
+
 (i) HV_Testing.data: firt 100 tuples of Hill_Valley_with_noise_Testing.data
 
 These two files are abridgment verisons of Hill_Valley_with_noise dataset, since running on the original Hill_Valley_with_noise dataset will cost a lot of time and memory. These abridgment verisons are good samples to show the effect of the KNN algorithm, so they are used as the default dataset.
@@ -31,19 +43,22 @@ Since IBM DB2 Express Edition seems not working well on the up-to-date Mac OS, I
 ### (1) generate preprocessed data and load_data.sh (HAS BEEN DONE)
 This step runs a python script db2_preprocess.py, which reads the original csv-format training data and testing data, generate preprocessed data (adding a Point ID column which used in the verticalization step), and at the mean time generates a DB2 script load_data.sh. The hyper-parameter K is also assigned in this step.
 
-Usage:
+#### Usage:
+
 	$ python db2_preprocess.py K path-of-training-data path-of-testing-data  # set K and path of training data and testing data
 or
+
 	$ python db2_preprocess.py K  # set K and using default path of training data and testing data
 or
+
 	$ python db2_preprocess.py    # using default arguments
 
-Default arguments:
+#### Default arguments:
 	K = 1
 	train_data_filename = "Hill-Valley/HV_Training.data"
 	test_data_filename = "Hill-Valley/HV_Testing.data"
 
-Output:
+#### Output:
 	training_preprocessed.data
 	testing_preprocessed.data
 	load_data.sh
@@ -52,6 +67,7 @@ Output:
 
 ### (2) Verticalize Table
 This step first reads the preprocessed training and testing data into DB2 table TRAINSET and TESTSET by running load_data.sh, then verticalize them into four tables: VTRAIN, TRAIN_LABEL, VTEST, TEST_LABEL by running verticalize.sh. The schema of VTRAIN (VTEST) and TRAIN_LABEL (TEST_LABEL) are:
+
 	VTRAIN (VTEST) (
 		PID INTEGER, 
 		ColID INTEGER,
@@ -63,6 +79,7 @@ This step first reads the preprocessed training and testing data into DB2 table 
 	)
 
 Usage:
+
 	$ bash ./load_data.sh
 	$ bash ./verticalize.sh
 
@@ -74,11 +91,12 @@ This step run the KNN classification algorithm on the verticalized table, and ou
 
 The accuracy table will finally show in the terminal, e.g.:
 
-TEST_NUMBER TRUE_CLASSIFIED ACCURACY                
------------ --------------- ------------------------
-        100              55   +5.50000000000000E-001
+	TEST_NUMBER TRUE_CLASSIFIED ACCURACY                
+	----------- --------------- ------------------------
+		100              55   +5.50000000000000E-001
 
 Usage:
+
 	$ bash ./knn.sh
 
 Since this script involves SQL operations inserting a big table, DB2 may raise "The transaction log for the database is full" error. If this happens, using the following commands to update log configurations of DB2[2]:
@@ -103,13 +121,17 @@ This step read the original dataset, and output the target DeALS program knn.dea
 	          } ).
 
 Usage:
+
 	$ python generate_datalog.py K path-of-training-data path-of-testing-data
 or
+
 	$ python generate_datalog.py K  # set K and using default path of training data and test data
 or
+
 	$ python generate_datalog.py    # using default arguments
 
 Default arguments:
+
 	K = 1
 	train_data_filename = "Hill-Valley/HV_Training.data"
 	test_data_filename = "Hill-Valley/HV_Testing.data"
@@ -131,14 +153,16 @@ This step is very time-consuming, may take hours to finish.
 Because of long running time of experiments, I only run the following experiments on 2 groups of dataset:
 
 (1) HV_Training.data, HV_Testing.data, K = 1:
-TEST_NUMBER TRUE_CLASSIFIED ACCURACY                
------------ --------------- ------------------------
-        100              55                      55%
+
+	TEST_NUMBER TRUE_CLASSIFIED ACCURACY                
+	----------- --------------- ------------------------
+		100              55                      55%
 
 (2) Hill_Valley_without_noise_Training.data, Hill_Valley_without_noise_Testing.data, K = 1:
-TEST_NUMBER TRUE_CLASSIFIED ACCURACY                
------------ --------------- ------------------------
-        606             376                      62%
+
+	TEST_NUMBER TRUE_CLASSIFIED ACCURACY                
+	----------- --------------- ------------------------
+		606             376                      62%
 
 
 ## 5. Structure of the submission zip:
