@@ -6,7 +6,7 @@ database( { train(Id:integer, ColId:integer, Value:float),
             define_k(K:integer)
           } ).
 
-define_k(3).
+define_k(1).
 
 train(1,0,1317.265789).
 train(1,1,1315.220951).
