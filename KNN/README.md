@@ -1,11 +1,8 @@
-README of CS240A Project: Data Mining with Declarative Programming
+# README of CS240A Project: Data Mining with Declarative Programming
 
 Part 2: K-Nearest Neighbors Classifier (KNN)
 
-Zhengyuan Liu, 604945064, zhengyuanliu@ucla.edu
-
-
-1. Dataset: Hill-Valley Data Set[1]
+## 1. Dataset: Hill-Valley Data Set[1]
 The dataset is in Hill-Valley folder, there are eight files, the first seven files are original:
 
 (a) Hill_Valley_without_noise_Training.data 
@@ -28,11 +25,10 @@ There are 2 additional files:
 
 These two files are abridgment verisons of Hill_Valley_with_noise dataset, since running on the original Hill_Valley_with_noise dataset will cost a lot of time and memory. These abridgment verisons are good samples to show the effect of the KNN algorithm, so they are used as the default dataset.
 
-
-2. SQL Program in IDM DB2
+## 2. SQL Program in IDM DB2
 Since IBM DB2 Express Edition seems not working well on the up-to-date Mac OS, I used IBM DB2 Developer Community Edition to implement SQL program, which is a database server running in a Docker container. To run the DB2 script, you need to run it in the Docker container with the DB2 server. (It should also work in any OS with a DB2 server, but not tested) I used the default SAMPLE database of DB2 as the database of this project.
 
-(1) generate preprocessed data and load_data.sh (HAS BEEN DONE)
+### (1) generate preprocessed data and load_data.sh (HAS BEEN DONE)
 This step runs a python script db2_preprocess.py, which reads the original csv-format training data and testing data, generate preprocessed data (adding a Point ID column which used in the verticalization step), and at the mean time generates a DB2 script load_data.sh. The hyper-parameter K is also assigned in this step.
 
 Usage:
@@ -54,7 +50,7 @@ Output:
 
 * This step has been done with the default dataset and hyper-parameter K, and you can run it again to change dataset and K.
 
-(2) Verticalize Table
+### (2) Verticalize Table
 This step first reads the preprocessed training and testing data into DB2 table TRAINSET and TESTSET by running load_data.sh, then verticalize them into four tables: VTRAIN, TRAIN_LABEL, VTEST, TEST_LABEL by running verticalize.sh. The schema of VTRAIN (VTEST) and TRAIN_LABEL (TEST_LABEL) are:
 	VTRAIN (VTEST) (
 		PID INTEGER, 
@@ -70,7 +66,7 @@ Usage:
 	$ bash ./load_data.sh
 	$ bash ./verticalize.sh
 
-(3) KNN classification
+### (3) KNN classification
 This step run the KNN classification algorithm on the verticalized table, and output the classification results (in table RESULTS) and accuracy (in table ACCURACY). The schema of RESULTS and ACCURACY are:
 
 	RESULTS (TEST_PID INTEGER, PREDICTED_CLASS INTEGER)
@@ -94,9 +90,9 @@ Since this script involves SQL operations inserting a big table, DB2 may raise "
 	$ db2start
 
 
-3. Datalog Program in DeALS
+## 3. Datalog Program in DeALS
 
-(1) Generate DeALS program knn.deal (HAS BEEN DONE)
+### (1) Generate DeALS program knn.deal (HAS BEEN DONE)
 This step read the original dataset, and output the target DeALS program knn.deal with the veritcalized facts. The database schema is:
 
 	database( { train(Id:integer, ColId:integer, Value:float),
@@ -131,7 +127,7 @@ This step run the knn.deal by DeALS-0.91, and output true_classify(T), test_coun
 This step is very time-consuming, may take hours to finish.
 
 
-4. KNN Classification Results on Hill-Valley dataset
+## 4. KNN Classification Results on Hill-Valley dataset
 Because of long running time of experiments, I only run the following experiments on 2 groups of dataset:
 
 (1) HV_Training.data, HV_Testing.data, K = 1:
@@ -145,7 +141,7 @@ TEST_NUMBER TRUE_CLASSIFIED ACCURACY
         606             376                      62%
 
 
-5. Structure of the submission zip:
+## 5. Structure of the submission zip:
 KNN-Submission
 |--DB2
    |--Hill-Valley: Dataset Folder
@@ -164,6 +160,6 @@ KNN-Submission
 |--README
 
 
-Reference:
+## Reference:
 [1] Hill-Valley Data Set, http://archive.ics.uci.edu/ml/datasets/hill-valley
 [2] DB2 “The transaction log for the database is full” Problem and Solution - CSDN Blog, https://blog.csdn.net/kongxx/article/details/41203939
