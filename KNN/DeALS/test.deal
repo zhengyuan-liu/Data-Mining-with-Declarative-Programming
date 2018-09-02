@@ -1,0 +1,223 @@
+database( { train(Id:integer, ColId:integer, Value:float),
+            train_labels(Id:integer, Label:integer),
+            test(Id:integer, ColId:integer, Value:float),
+            test_labels(Id:integer, Label:integer),
+            knn_classify(Id:integer, Label:integer),
+            define_k(K:integer)
+          } ).
+
+test_labels(1,0).
+test_labels(2,0).
+test_labels(3,0).
+test_labels(4,0).
+test_labels(5,1).
+test_labels(6,0).
+test_labels(7,1).
+test_labels(8,1).
+test_labels(9,0).
+test_labels(10,1).
+test_labels(11,0).
+test_labels(12,0).
+test_labels(13,1).
+test_labels(14,1).
+test_labels(15,0).
+test_labels(16,0).
+test_labels(17,0).
+test_labels(18,0).
+test_labels(19,0).
+test_labels(20,1).
+test_labels(21,0).
+test_labels(22,0).
+test_labels(23,1).
+test_labels(24,1).
+test_labels(25,1).
+test_labels(26,1).
+test_labels(27,1).
+test_labels(28,1).
+test_labels(29,0).
+test_labels(30,1).
+test_labels(31,1).
+test_labels(32,0).
+test_labels(33,1).
+test_labels(34,0).
+test_labels(35,0).
+test_labels(36,1).
+test_labels(37,0).
+test_labels(38,1).
+test_labels(39,0).
+test_labels(40,1).
+test_labels(41,1).
+test_labels(42,0).
+test_labels(43,1).
+test_labels(44,0).
+test_labels(45,0).
+test_labels(46,1).
+test_labels(47,1).
+test_labels(48,1).
+test_labels(49,0).
+test_labels(50,1).
+test_labels(51,0).
+test_labels(52,1).
+test_labels(53,0).
+test_labels(54,0).
+test_labels(55,1).
+test_labels(56,0).
+test_labels(57,0).
+test_labels(58,0).
+test_labels(59,0).
+test_labels(60,1).
+test_labels(61,0).
+test_labels(62,0).
+test_labels(63,0).
+test_labels(64,1).
+test_labels(65,0).
+test_labels(66,0).
+test_labels(67,1).
+test_labels(68,0).
+test_labels(69,1).
+test_labels(70,1).
+test_labels(71,1).
+test_labels(72,0).
+test_labels(73,1).
+test_labels(74,0).
+test_labels(75,0).
+test_labels(76,0).
+test_labels(77,0).
+test_labels(78,0).
+test_labels(79,1).
+test_labels(80,0).
+test_labels(81,0).
+test_labels(82,0).
+test_labels(83,1).
+test_labels(84,1).
+test_labels(85,0).
+test_labels(86,1).
+test_labels(87,1).
+test_labels(88,1).
+test_labels(89,0).
+test_labels(90,0).
+test_labels(91,0).
+test_labels(92,1).
+test_labels(93,1).
+test_labels(94,0).
+test_labels(95,1).
+test_labels(96,0).
+test_labels(97,0).
+test_labels(98,0).
+test_labels(99,0).
+test_labels(100,1).
+
+knn_classify(1, 0).
+knn_classify(2, 1).
+knn_classify(3, 1).
+knn_classify(4, 1).
+knn_classify(5, 0).
+knn_classify(6, 0).
+knn_classify(7, 1).
+knn_classify(8, 1).
+knn_classify(9, 1).
+knn_classify(10, 1).
+knn_classify(11, 0).
+knn_classify(12, 1).
+knn_classify(13, 0).
+knn_classify(14, 0).
+knn_classify(15, 1).
+knn_classify(16, 0).
+knn_classify(17, 0).
+knn_classify(18, 0).
+knn_classify(19, 1).
+knn_classify(20, 0).
+knn_classify(21, 0).
+knn_classify(22, 0).
+knn_classify(23, 0).
+knn_classify(24, 1).
+knn_classify(25, 1).
+knn_classify(26, 1).
+knn_classify(27, 1).
+knn_classify(28, 0).
+knn_classify(29, 0).
+knn_classify(30, 1).
+knn_classify(31, 0).
+knn_classify(32, 1).
+knn_classify(33, 0).
+knn_classify(34, 0).
+knn_classify(35, 0).
+knn_classify(36, 0).
+knn_classify(37, 0).
+knn_classify(38, 1).
+knn_classify(39, 0).
+knn_classify(40, 1).
+knn_classify(41, 0).
+knn_classify(42, 1).
+knn_classify(43, 1).
+knn_classify(44, 0).
+knn_classify(45, 1).
+knn_classify(46, 1).
+knn_classify(47, 1).
+knn_classify(48, 0).
+knn_classify(49, 1).
+knn_classify(50, 1).
+knn_classify(51, 0).
+knn_classify(52, 0).
+knn_classify(53, 0).
+knn_classify(54, 0).
+knn_classify(55, 1).
+knn_classify(56, 0).
+knn_classify(57, 0).
+knn_classify(58, 1).
+knn_classify(59, 0).
+knn_classify(60, 0).
+knn_classify(61, 1).
+knn_classify(62, 1).
+knn_classify(63, 0).
+knn_classify(64, 0).
+knn_classify(65, 0).
+knn_classify(66, 0).
+knn_classify(67, 1).
+knn_classify(68, 1).
+knn_classify(69, 1).
+knn_classify(70, 0).
+knn_classify(71, 0).
+knn_classify(72, 0).
+knn_classify(73, 1).
+knn_classify(74, 0).
+knn_classify(75, 1).
+knn_classify(76, 1).
+knn_classify(77, 1).
+knn_classify(78, 1).
+knn_classify(79, 0).
+knn_classify(80, 0).
+knn_classify(81, 0).
+knn_classify(82, 0).
+knn_classify(83, 1).
+knn_classify(84, 1).
+knn_classify(85, 1).
+knn_classify(86, 1).
+knn_classify(87, 1).
+knn_classify(88, 1).
+knn_classify(89, 0).
+knn_classify(90, 1).
+knn_classify(91, 1).
+knn_classify(92, 0).
+knn_classify(93, 1).
+knn_classify(94, 1).
+knn_classify(95, 0).
+knn_classify(96, 1).
+knn_classify(97, 0).
+knn_classify(98, 1).
+knn_classify(99, 0).
+knn_classify(100, 0).
+
+% Compute accuracy
+true_classify(count<Id>) <- knn_classify(Id, Label), test_labels(Id, Label).
+test_count(count<Id>) <- test_labels(Id, _).
+accuracy(A) <- true_classify(T), test_count(C), A = T / C.
+
+export true_classify(T).
+query true_classify(T).
+
+export test_count(C).
+query test_count(C).
+
+export accuracy(A).
+query accuracy(A).

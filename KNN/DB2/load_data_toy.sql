@@ -1,0 +1,24 @@
+CONNECT TO SAMPLE
+
+CREATE OR REPLACE PROCEDURE drop_table_if_exists(IN TableName VARCHAR(50))
+LANGUAGE SQL
+BEGIN
+	IF EXISTS (SELECT NAME FROM SYSIBM.SYSTABLES WHERE NAME = TableName)
+	THEN
+		DROP TABLE tab_name;
+	END IF;
+END
+
+CALL drop_table_if_exists('K')
+CREATE TABLE K (K INTEGER)
+INSERT INTO K VALUES (3);
+
+CREATE TABLE tempdata (
+	PID INTEGER NOT NULL,
+	X1 Double,
+	X2 Double,
+	X3 Double,
+	X4 Double,
+	class INTEGER
+)
+IMPORT FROM 'test.data' OF DEL INSERT INTO tempdata
